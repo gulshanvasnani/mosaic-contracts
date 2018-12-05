@@ -46,7 +46,7 @@ contract GatewayBase {
 
     bytes32 constant STAKEINTENT_TYPEHASH = keccak256(
         abi.encode(
-            "Stake(uint256 amount,address beneficiary,address staker,uint256 stakerNonce,uint256 gasPrice,uint256 gasLimit,address token)"
+            "StakeIntentHash(uint256 amount,address beneficiary,address staker,uint256 stakerNonce,uint256 gasPrice,uint256 gasLimit,address token)"
         )
     );
 
@@ -59,14 +59,7 @@ contract GatewayBase {
 
     bytes32 constant REDEEMINTENT_TYPEHASH = keccak256(
         abi.encode(
-            "Redeem(uint256 amount,address beneficiary,address _redeemer,address _redeemerNonce,uint256 _gasPrice,uint256 _gasLimit,address _token)"
-        )
-    );
-
-
-    bytes32 constant GATEWAY_LINK_TYPEHASH = keccak256(
-        abi.encode(
-            "GatewayLink(bytes32 messageHash,MessageBus.Message message)"
+            "RedeemIntentHash(uint256 amount,address beneficiary,address _redeemer,address _redeemerNonce,uint256 _gasPrice,uint256 _gasLimit,address _token)"
         )
     );
 

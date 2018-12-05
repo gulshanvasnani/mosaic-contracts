@@ -97,6 +97,15 @@ library MessageBus {
     /** Position of inbox in struct MessageBox */
     uint8 constant INBOX_OFFSET = 1;
 
+    // move from here
+    bytes32 constant STAKE_MESSAGE_TYPE_HASH =  keccak256(
+        abi.encodePacked("Message(StakeIntentHash intentHash,uint256 nonce,uint256 gasPrice,uint256 gasLimit)StakeIntentHash(uint256 amount,address beneficiary,address staker,uint256 stakerNonce,uint256 gasPrice,uint256 gasLimit,address token)")
+    );
+
+    bytes32 constant REDEEM_MESSAGE_TYPE_HASH = keccak256(
+        abi.encodePacked("Message(RedeemIntentHash intentHash,uint256 nonce,uint256 gasPrice,uint256 gasLimit)RedeemIntentHash(uint256 amount,address beneficiary,address _redeemer,address _redeemerNonce,uint256 _gasPrice,uint256 _gasLimit,address _token)")
+    );
+
     /**
      * @notice Declare a new message. This will update the outbox status to
      *         `Declared` for the given message hash

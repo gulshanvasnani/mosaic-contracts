@@ -305,7 +305,7 @@ contract EIP20Gateway is Gateway {
 
         // Get the messageHash
         messageHash_ = MessageBus.messageDigest(
-            STAKEINTENT_TYPEHASH,
+            STAKE_MESSAGE_TYPE_HASH,
             intentHash,
             _nonce,
             _gasPrice,
@@ -713,7 +713,7 @@ contract EIP20Gateway is Gateway {
 
         // Get the message hash
         messageHash_ = MessageBus.messageDigest(
-            REDEEMINTENT_TYPEHASH,
+            REDEEM_MESSAGE_TYPE_HASH,
             intentHash,
             _redeemerNonce,
             _gasPrice,
