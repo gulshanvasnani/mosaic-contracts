@@ -299,12 +299,13 @@ contract EIP20Gateway is Gateway {
             _nonce,
             _gasPrice,
             _gasLimit,
-            address(token)
+            address(token),
+            STAKEINTENT_TYPEHASH
         );
 
         // Get the messageHash
         messageHash_ = MessageBus.messageDigest(
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             intentHash,
             _nonce,
             _gasPrice,
@@ -341,7 +342,7 @@ contract EIP20Gateway is Gateway {
         // Declare message in outbox
         MessageBus.declareMessage(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             messages[messageHash_],
             _signature
         );
@@ -406,7 +407,7 @@ contract EIP20Gateway is Gateway {
         // Progress outbox
         MessageBus.progressOutbox(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             message,
             _unlockSecret
         );
@@ -471,7 +472,7 @@ contract EIP20Gateway is Gateway {
 
         MessageBus.progressOutboxWithProof(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             message,
             _rlpEncodedParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -522,7 +523,7 @@ contract EIP20Gateway is Gateway {
         // Declare staking revocation.
         MessageBus.declareRevocationMessage(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             message
         );
 
@@ -602,7 +603,7 @@ contract EIP20Gateway is Gateway {
         MessageBus.progressOutboxRevocation(
             messageBox,
             message,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             MESSAGE_BOX_OFFSET,
             _rlpEncodedParentNodes,
             storageRoot,
@@ -706,12 +707,13 @@ contract EIP20Gateway is Gateway {
             _redeemer,
             _redeemerNonce,
             _gasPrice,
-            _gasLimit
+            _gasLimit,
+            REDEEMINTENT_TYPEHASH
         );
 
         // Get the message hash
         messageHash_ = MessageBus.messageDigest(
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             intentHash,
             _redeemerNonce,
             _gasPrice,
@@ -800,7 +802,7 @@ contract EIP20Gateway is Gateway {
         // Progress inbox
         MessageBus.progressInbox(
             messageBox,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             message,
             _unlockSecret
         );
@@ -870,7 +872,7 @@ contract EIP20Gateway is Gateway {
 
         MessageBus.progressInboxWithProof(
             messageBox,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             message,
             _rlpEncodedParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -938,7 +940,7 @@ contract EIP20Gateway is Gateway {
         // Confirm revocation
         MessageBus.confirmRevocation(
             messageBox,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             message,
             _rlpEncodedParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -996,7 +998,7 @@ contract EIP20Gateway is Gateway {
         // Confirm message
         MessageBus.confirmMessage(
             messageBox,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             _message,
             _rlpParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -1146,7 +1148,8 @@ contract EIP20Gateway is Gateway {
         address _redeemer,
         uint256 _redeemerNonce,
         uint256 _gasPrice,
-        uint256 _gasLimit
+        uint256 _gasLimit,
+        bytes32 _redeemIntentHash
     )
         private
         view
@@ -1159,7 +1162,8 @@ contract EIP20Gateway is Gateway {
             _redeemerNonce,
             _gasPrice,
             _gasLimit,
-            address(token)
+            address(token),
+            _redeemIntentHash
         );
     }
 

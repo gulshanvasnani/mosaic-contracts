@@ -268,7 +268,7 @@ contract EIP20CoGateway is CoGateway {
         // Progress inbox
         MessageBus.progressInbox(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             message,
             _unlockSecret
         );
@@ -342,7 +342,7 @@ contract EIP20CoGateway is CoGateway {
 
         MessageBus.progressInboxWithProof(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             message,
             _rlpEncodedParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -411,7 +411,7 @@ contract EIP20CoGateway is CoGateway {
         // Confirm revocation
         MessageBus.confirmRevocation(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             message,
             _rlpEncodedParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -475,7 +475,7 @@ contract EIP20CoGateway is CoGateway {
         // Progress outbox
         MessageBus.progressOutbox(
             messageBox,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             message,
             _unlockSecret
         );
@@ -540,7 +540,7 @@ contract EIP20CoGateway is CoGateway {
 
         MessageBus.progressOutboxWithProof(
             messageBox,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             message,
             _rlpEncodedParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -683,7 +683,7 @@ contract EIP20CoGateway is CoGateway {
         MessageBus.progressOutboxRevocation(
             messageBox,
             message,
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             MESSAGE_BOX_OFFSET,
             _rlpEncodedParentNodes,
             storageRoot,
@@ -834,7 +834,7 @@ contract EIP20CoGateway is CoGateway {
 
         // Get the messageHash
         messageHash_ = MessageBus.messageDigest(
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             intentHash,
             _stakerNonce,
             _gasPrice,
@@ -952,12 +952,13 @@ contract EIP20CoGateway is CoGateway {
             _nonce,
             _gasPrice,
             _gasLimit,
-            valueToken
+            valueToken,
+            REDEEMINTENT_TYPEHASH
         );
 
         // Get the messageHash
         messageHash_ = MessageBus.messageDigest(
-            REDEEM_TYPEHASH,
+            REDEEMINTENT_TYPEHASH,
             intentHash,
             _nonce,
             _gasPrice,
@@ -1048,7 +1049,7 @@ contract EIP20CoGateway is CoGateway {
         // Confirm message
         MessageBus.confirmMessage(
             messageBox,
-            STAKE_TYPEHASH,
+            STAKEINTENT_TYPEHASH,
             _message,
             _rlpParentNodes,
             MESSAGE_BOX_OFFSET,
@@ -1092,7 +1093,8 @@ contract EIP20CoGateway is CoGateway {
             _stakerNonce,
             _gasPrice,
             _gasLimit,
-            valueToken
+            valueToken,
+            STAKEINTENT_TYPEHASH
         );
     }
 

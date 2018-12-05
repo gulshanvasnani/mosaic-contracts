@@ -180,13 +180,14 @@ library GatewayLib {
     /**
      * @notice  function to calculate staking intent hash.
      *
-     * @param _amount staking amount.
-     * @param _beneficiary minting account.
-     * @param _staker staking account.
-     * @param _stakerNonce nounce of staker.
-     * @param _gasPrice price used for reward calculation.
-     * @param _gasLimit max limit for reward calculation.
+     * @param _amount Staking amount.
+     * @param _beneficiary Minting account.
+     * @param _staker Staking account.
+     * @param _stakerNonce Nonce of staker.
+     * @param _gasPrice Price used for reward calculation.
+     * @param _gasLimit Max limit for reward calculation.
      * @param _token EIP20 token address used for staking.
+     * @param _stakeIntentTypeHash Staking intent type hash.
      *
      * @return bytes32 staking intent hash
      */
@@ -197,14 +198,16 @@ library GatewayLib {
         uint256 _stakerNonce,
         uint256 _gasPrice,
         uint256 _gasLimit,
-        address _token
+        address _token,
+        bytes32 _stakeIntentTypeHash
     )
-    external
-    pure
-    returns (bytes32)
+        external
+        pure
+        returns (bytes32)
     {
         return keccak256(
             abi.encodePacked(
+                _stakeIntentTypeHash,
                 _amount,
                 _beneficiary,
                 _staker,
@@ -236,14 +239,16 @@ library GatewayLib {
         uint256 _redeemerNonce,
         uint256 _gasPrice,
         uint256 _gasLimit,
-        address _token
+        address _token,
+        bytes32 _redeemIntentHash
     )
-    external
-    pure
-    returns (bytes32)
+        external
+        pure
+        returns (bytes32)
     {
         return keccak256(
             abi.encodePacked(
+                _redeemIntentHash,
                 _amount,
                 _beneficiary,
                 _redeemer,
