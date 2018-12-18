@@ -87,7 +87,7 @@ contract('SafeCore.getStateRoot()', function (accounts) {
     await safeCore.commitStateRoot(
       blockHeight,
       stateRoot,
-      { from: worker },
+      { from: owner },
     );
 
     let latestStateRoot = await safeCore.getStateRoot.call(blockHeight);

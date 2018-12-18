@@ -67,7 +67,7 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
       safeCore.commitStateRoot(
         blockHeight,
         stateRoot,
-        { from: worker },
+        { from: owner },
       ),
       'State root must not be zero.',
     );
@@ -83,7 +83,7 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
       safeCore.commitStateRoot(
         blockHeight,
         stateRoot,
-        { from: worker },
+        { from: owner },
       ),
       'Given block height is lower or equal to highest committed state root block height.',
     );
@@ -97,14 +97,14 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
       safeCore.commitStateRoot(
         blockHeight,
         stateRoot,
-        { from: worker },
+        { from: owner },
       ),
       'Given block height is lower or equal to highest committed state root block height.',
     );
 
   });
 
-  it('should fail when caller is not worker address', async () => {
+  it('should fail when caller is not organization address', async () => {
 
     blockHeight = blockHeight.addn(1);
 
@@ -114,7 +114,7 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
         stateRoot,
         { from: accounts[6] },
       ),
-      'Only whitelisted workers are allowed to call this method.',
+      'Only the organization is allowed to call this method.',
     );
 
   });
@@ -126,7 +126,7 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
     let result = await safeCore.commitStateRoot.call(
       blockHeight,
       stateRoot,
-      { from: worker },
+      { from: owner },
     );
 
     assert.strictEqual(
@@ -138,7 +138,7 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
     await safeCore.commitStateRoot(
       blockHeight,
       stateRoot,
-      { from: worker },
+      { from: owner },
     );
 
     let latestBlockHeight = await safeCore.getLatestStateRootBlockHeight.call();
@@ -164,7 +164,7 @@ contract('SafeCore.commitStateRoot()', function (accounts) {
     let tx = await safeCore.commitStateRoot(
       blockHeight,
       stateRoot,
-      { from: worker },
+      { from: owner },
     );
 
     let event = EventDecoder.getEvents(tx, safeCore);

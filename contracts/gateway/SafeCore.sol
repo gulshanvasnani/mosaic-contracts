@@ -172,7 +172,7 @@ contract SafeCore is StateRootInterface, Organized {
         bytes32 _stateRoot
     )
         external
-        onlyWorker
+        onlyOrganization
         returns (bool success_)
     {
         // State root should be valid
